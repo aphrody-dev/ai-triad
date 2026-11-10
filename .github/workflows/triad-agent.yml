@@ -1,0 +1,51 @@
+name: Sovereign AI Triad Verification
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: "Verification prompt for Triad Council"
+        required: false
+        default: "Review changed TypeScript and Rust files for safety, memory, and regression issues."
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  triad-council:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun v1.4.4
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Run Format, Typecheck, and Unit Tests
+        working-directory: packages/ai-triad
+        run: |
+          bun fmt --check
+          bun check
+          bun test
+
+      - name: Headless Multi-CLI Review (Claude + Codex + Antigravity)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          if command -v claude >/dev/null 2>&1 && [ -n "${ANTHROPIC_API_KEY:-}" ]; then
+            claude -p "${{ inputs.prompt || 'Audit PR diff for regressions' }}" --output-format json > claude-review.json
+          fi
+          if command -v codex >/dev/null 2>&1 && [ -n "${OPENAI_API_KEY:-}" ]; then
+            codex exec review --json > codex-review.jsonl || true
+          fi
+          if command -v agy >/dev/null 2>&1 && [ -n "${GEMINI_API_KEY:-}" ]; then
+            agy -p "${{ inputs.prompt || 'Audit PR diff for regressions' }}" --output-format json --mode plan > agy-review.json
+          fi

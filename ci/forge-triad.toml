@@ -1,0 +1,17 @@
+# Sovereign Forge (frg) Pipeline — AI Triad Autonomous Gate
+[pipeline]
+name = "ai-triad-gate"
+workspace = "C:/src/packages/ai-triad"
+
+[[stages]]
+name = "static-verification"
+commands = ["bun fmt --check", "bun check", "bun test"]
+
+[[stages]]
+name = "triad-council-audit"
+commands = [
+  "triad doctor",
+  "claude -p \"Verify zero secret leaks and strict TypeScript types\" --output-format json",
+  "codex exec \"Verify Rust and Bun ABI boundaries\" --json --skip-git-repo-check",
+  "agy -p \"Verify MCP 2025-03-26 and ACP protocol conformance\" --output-format json --mode plan",
+]

@@ -1,0 +1,25 @@
+{
+  "name": "@sovereign/ai-triad",
+  "version": "1.0.0",
+  "description": "Cross-AI CLI, TUI, GUI, OAuth 2.1/PKCE/Device-Code, MCP & Multi-Protocol Gateway across OpenAI Codex, Google Antigravity/Gemini, Anthropic Claude Code, OpenCode, Pi, and Zed",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "bin": {
+    "triad": "./src/cli.ts"
+  },
+  "scripts": {
+    "start": "bun run src/cli.ts serve",
+    "sync": "bun run src/cli.ts sync-configs",
+    "docs": "bun run src/cli.ts capture-help",
+    "doctor": "bun run src/cli.ts doctor",
+    "tui": "bun run src/cli.ts tui",
+    "ci": "bun run src/cli.ts ci-gen",
+    "build": "bun build --compile --minify src/cli.ts --outfile C:/Users/aphro/.local/bin/triad.exe",
+    "fmt": "bun fmt",
+    "check": "bun check",
+    "test": "bun test"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
