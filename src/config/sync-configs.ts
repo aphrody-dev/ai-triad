@@ -60,6 +60,14 @@ args = ["mcp-stdio"]
 command = "C:/Users/aphro/.local/bin/triad.exe"
 args = ["mcp-stdio"]
 
+[mcp_servers.context7]
+command = "bun"
+args = ["run", "C:/Users/aphro/.gemini/mcp-servers/context7/index.ts"]
+
+[mcp_servers.knowledge_engine]
+command = "C:/Users/aphro/.local/bin/ske.exe"
+args = ["mcp-stdio"]
+
 [mcp_servers.native_hardware_cuda]
 command = "bun"
 args = ["run", "C:/Users/aphro/.gemini/mcp-servers/native-hardware-cuda/index.ts"]
@@ -227,6 +235,16 @@ sandbox_mode = "workspace-write"
       command: "C:/Users/aphro/.local/bin/triad.exe",
       args: ["mcp-stdio"],
     },
+    context7: {
+      type: "stdio",
+      command: "bun",
+      args: ["run", "C:/Users/aphro/.gemini/mcp-servers/context7/index.ts"],
+    },
+    "knowledge-engine": {
+      type: "stdio",
+      command: "C:/Users/aphro/.local/bin/ske.exe",
+      args: ["mcp-stdio"],
+    },
     "native-hardware-cuda": {
       type: "stdio",
       command: "bun",
@@ -270,6 +288,8 @@ sandbox_mode = "workspace-write"
       ...existingMcp,
       "ai-os": sovereignMcpServers["ai-os"],
       "ai-triad": sovereignMcpServers["ai-triad"],
+      context7: sovereignMcpServers.context7,
+      "knowledge-engine": sovereignMcpServers["knowledge-engine"],
       "native-hardware-cuda": sovereignMcpServers["native-hardware-cuda"],
     };
     writeFileSync(
@@ -412,6 +432,14 @@ See [\`AGENTS.md\`](./AGENTS.md) for the canonical cross-agent operating contrac
         command: "C:/Users/aphro/.local/bin/triad.exe",
         args: ["mcp-stdio"],
       },
+      context7: {
+        command: "bun",
+        args: ["run", "C:/Users/aphro/.gemini/mcp-servers/context7/index.ts"],
+      },
+      "knowledge-engine": {
+        command: "C:/Users/aphro/.local/bin/ske.exe",
+        args: ["mcp-stdio"],
+      },
     };
     writeFileSync(
       targetMcpPath,
@@ -510,6 +538,20 @@ See [\`AGENTS.md\`](./AGENTS.md) for the canonical cross-agent operating contrac
         command: ["C:/Users/aphro/.local/bin/triad.exe", "mcp-stdio"],
         enabled: true,
       },
+      context7: {
+        type: "local",
+        command: [
+          "bun",
+          "run",
+          "C:/Users/aphro/.gemini/mcp-servers/context7/index.ts",
+        ],
+        enabled: true,
+      },
+      knowledge_engine: {
+        type: "local",
+        command: ["C:/Users/aphro/.local/bin/ske.exe", "mcp-stdio"],
+        enabled: true,
+      },
     };
     const ocProviders =
       ocObj.providers && typeof ocObj.providers === "object"
@@ -596,6 +638,24 @@ See [\`AGENTS.md\`](./AGENTS.md) for the canonical cross-agent operating contrac
         enabled: true,
         command: {
           path: "C:/Users/aphro/.local/bin/triad.exe",
+          args: ["mcp-stdio"],
+          env: {},
+        },
+      },
+      context7: {
+        source: "custom",
+        enabled: true,
+        command: {
+          path: "bun",
+          args: ["run", "C:/Users/aphro/.gemini/mcp-servers/context7/index.ts"],
+          env: {},
+        },
+      },
+      "knowledge-engine": {
+        source: "custom",
+        enabled: true,
+        command: {
+          path: "C:/Users/aphro/.local/bin/ske.exe",
           args: ["mcp-stdio"],
           env: {},
         },
