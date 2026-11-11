@@ -11,7 +11,7 @@ import { routeTask, runAgent, runCouncil } from "./runners/triad-runner.ts";
 import { runTriadMcpStdio, startTriadGatewayServer } from "./server/gateway.ts";
 import { renderTriadDashboard } from "./tui/dashboard.ts";
 
-const HELP_TEXT = `Sovereign AI Triad CLI (@sovereign/ai-triad v1.0.0)
+const HELP_TEXT = `Sovereign AI Triad CLI (@aphrody/ai-triad v1.0.0)
 Bidirectional Cross-AI CLI / TUI / GUI / OAuth / MCP / CI Hub for Codex, Antigravity, Claude Code, OpenCode, Pi, and Zed.
 
 Usage:

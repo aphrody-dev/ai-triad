@@ -1,5 +1,5 @@
 {
-  "name": "@sovereign/ai-triad",
+  "name": "@aphrody/ai-triad",
   "version": "1.0.0",
   "description": "Cross-AI CLI, TUI, GUI, OAuth 2.1/PKCE/Device-Code, MCP & Multi-Protocol Gateway across OpenAI Codex, Google Antigravity/Gemini, Anthropic Claude Code, OpenCode, Pi, and Zed",
   "type": "module",

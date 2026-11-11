@@ -2,7 +2,7 @@
 
 ## 1. Executive Topology
 
-`@sovereign/ai-triad` (`C:\src\packages\ai-triad`) unifies **OpenAI Codex (`codex`)**, **Google Antigravity (`agy` + `gemini`)**, and **Anthropic Claude Code (`claude`)** alongside **OpenCode**, **Pi**, **Zed**, and local **Sovereign AI-OS / Ring-3 CUDA (`sm_89`)** daemons using strictly documented, standard protocols:
+`@aphrody/ai-triad` (`C:\src\packages\ai-triad`) unifies **OpenAI Codex (`codex`)**, **Google Antigravity (`agy` + `gemini`)**, and **Anthropic Claude Code (`claude`)** alongside **OpenCode**, **Pi**, **Zed**, and local **Sovereign AI-OS / Ring-3 CUDA (`sm_89`)** daemons using strictly documented, standard protocols:
 
 - **MCP `2025-03-26` (Stdio & Streamable HTTP)**: Bidirectional cross-agent tool invocation (`triad mcp-stdio` and `POST http://127.0.0.1:4319/mcp`).
 - **ACP v1 (Agent Client Protocol)**: Native JSON-RPC stdio session orchestration across `agy acp`, `gemini --acp`, and Zed external agents.
@@ -20,7 +20,7 @@ flowchart LR
     ZedIDE["Zed Editor + OpenCode + Pi"]
   end
 
-  subgraph Hub["@sovereign/ai-triad (:4319 + triad.exe)"]
+  subgraph Hub["@aphrody/ai-triad (:4319 + triad.exe)"]
     MCP["MCP 2025-03-26 Server (stdio + /mcp)"]
     OAI["/v1/chat/completions + /v1/responses"]
     ANT["/v1/messages"]

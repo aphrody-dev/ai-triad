@@ -815,7 +815,7 @@ export function createGatewayFetchHandler(hooks?: GatewayExecutorHooks) {
       return Response.json(
         {
           ok: true,
-          service: "@sovereign/ai-triad",
+          service: "@aphrody/ai-triad",
           mcpProtocolVersion: TRIAD_MCP_PROTOCOL_VERSION,
           endpoints: [
             "/v1/chat/completions",
