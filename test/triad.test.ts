@@ -120,9 +120,9 @@ describe("RFC 7636 PKCE S256 & RFC 8628 Device Authorization", () => {
 
 describe("Cross-Auth Redaction & Leak Safety", () => {
   test("redacts raw tokens in strings and env files without leaking values", async () => {
-    const fakeAnthropic = "sk-ant-api03-SUPERSECRET1234567890ABCDEF";
-    const fakeOpenAi = "sk-proj-SUPERSECRET9876543210ZYXWVU";
-    const fakeGithub = "ghp_SUPERSECRETGITHUBTOKEN1234567890";
+    const fakeAnthropic = "sk-ant-api03-FAKE_FIXTURE_1234567890ABCDEF";
+    const fakeOpenAi = "sk-proj-FAKE_FIXTURE_9876543210ZYXWVU";
+    const fakeGithub = "ghp_FAKE_FIXTURE_GITHUBTOKEN1234567890";
 
     expect(redactSecret(fakeAnthropic)).toBe(
       `SET [redacted, len=${fakeAnthropic.length}]`,
@@ -130,7 +130,7 @@ describe("Cross-Auth Redaction & Leak Safety", () => {
     const scrubbed = redactTextSecrets(
       `Authorization: Bearer ${fakeOpenAi} and key=${fakeGithub}`,
     );
-    expect(scrubbed).not.toContain("SUPERSECRET");
+    expect(scrubbed).not.toContain("FAKE_FIXTURE");
     expect(scrubbed).toContain("[REDACTED:len=");
 
     const tempDir = join(tmpdir(), `triad-auth-test-${crypto.randomUUID()}`);
